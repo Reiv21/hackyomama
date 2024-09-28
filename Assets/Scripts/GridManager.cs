@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,16 +23,24 @@ public class GridManager : MonoBehaviour {
 
 
     [SerializeField] BuildingManager buildingManager;
-    void Awake() {
-        if (instance != null) {
+
+    void Awake()
+    {
+        if (instance != null)
+        {
             Debug.LogWarning("Multiple GridManagers detected, destroying this one");
             Destroy(gameObject);
             return;
         }
+
         instance = this;
         tiles = new Tile[width, height];
+    }
 
-        for (int x = 0; x < width; x++) {
+    void Start()
+    {
+
+    for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 GameObject tileObject = Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
