@@ -46,7 +46,13 @@ public class FloodManager : MonoBehaviour {
         }
     }
 
+    bool debugToggle;
+
     private void OnGUI() {
+
+        if (!debugToggle) {
+            return;
+        }
 
         // Draw water level and height text
         for (int x = 0; x < gridManager.width; x++) {
@@ -167,7 +173,8 @@ public class FloodManager : MonoBehaviour {
     }
 
     private void Update() {
-        UpdateWaterTiles();
+        if (Input.GetKeyDown(KeyCode.Backslash))
+            debugToggle = !debugToggle;
         if (Input.GetKeyDown(KeyCode.Backspace)) {
             for (int x = 0; x < gridManager.width; x++) {
                 for (int y = 0; y < gridManager.height; y++) {
@@ -251,6 +258,7 @@ public class FloodManager : MonoBehaviour {
             endLevel++;
         }
 
+        UpdateWaterTiles();
         if (endLevel == 0) {
             CancelInvoke(nameof(Tick));
             GameOver.instance.Win();
