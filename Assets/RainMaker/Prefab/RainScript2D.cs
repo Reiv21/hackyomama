@@ -10,6 +10,7 @@ namespace DigitalRuby.RainMaker
 {
     public class RainScript2D : BaseRainScript
     {
+        
         private static readonly Color32 explosionColor = new Color32(255, 255, 255, 255);
 
         private float cameraMultiplier = 1.0f;
@@ -187,6 +188,7 @@ namespace DigitalRuby.RainMaker
                 initialStartSizeExplosion = new Vector2(RainExplosionParticleSystem.main.startSize.constantMin, RainExplosionParticleSystem.main.startSize.constantMax);
             }
         }
+        
 
         protected override void Update()
         {
