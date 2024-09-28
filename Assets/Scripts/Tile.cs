@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour {
         // sprites are set in the levelmanager instance (using ints not enums bc unity is shit)
         Grass,
         House,
+        Building2,
         Tree,
     }
 

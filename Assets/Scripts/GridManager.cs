@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour {
     [HideInInspector]
     public static GridManager instance;
 
+    [SerializeField] BuildingManager buildingManager;
 
     public void Awake() {
         if (instance != null) {
@@ -68,10 +69,13 @@ public class GridManager : MonoBehaviour {
 
         Tile tile = tiles[x, y];
 
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButtonDown(0)) {
             // tile.waterLevel += 1;
             // tile.UpdateTile();
-            PlaceTile(x, y, Tile.TileType.House);
+            if(!buildingManager.CanBuild()) return;
+            Debug.Log((Tile.TileType) buildingManager.selectedIndex);
+            PlaceTile(x, y, (Tile.TileType) buildingManager.selectedIndex);
+            buildingManager.Build();
         }
 
         lastMousePos = new Vector2(x, y);
