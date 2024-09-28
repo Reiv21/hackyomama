@@ -7,9 +7,7 @@ public class GridManager : MonoBehaviour {
 
     [HideInInspector]
     public static GridManager instance;
-
-
-
+    
     public int width;
     public int height;
 
@@ -39,8 +37,7 @@ public class GridManager : MonoBehaviour {
 
     void Start()
     {
-
-    for (int x = 0; x < width; x++) {
+        for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 GameObject tileObject = Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
@@ -51,7 +48,11 @@ public class GridManager : MonoBehaviour {
                 tile.UpdateTile();
             }
         }
-
+        foreach (var tile in LevelManager.specialTiles)
+        {
+            tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
+            tiles[tile.x, tile.y].heightLevel = tile.heightLevel;
+        }
     }
 
     public bool IsOOB(int x, int y) {
@@ -78,14 +79,21 @@ public class GridManager : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0)) {
             if (!buildingManager.CanBuild()) return;
-            Debug.Log((Tile.TileType)buildingManager.selectedIndex);
+
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
             buildingManager.Build();
+            if (buildingManager.selectedIndex == 2)
+            {
+                tile.heightLevel = 120;
+                tile.UpdateTile();
+            }
+            else if (buildingManager.selectedIndex == 1)
+            {
+                tile.heightLevel = -10;
+                tile.UpdateTile();
+            }
         } else if (Input.GetMouseButton(1)) {
-            tile.waterLevel = 120;
-            tile.UpdateTile();
-        } else if (Input.GetMouseButton(2)) {
-            tile.heightLevel = 120;
+            tile.waterLevel = 220;
             tile.UpdateTile();
         }
 

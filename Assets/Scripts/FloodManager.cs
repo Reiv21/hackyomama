@@ -85,12 +85,18 @@ public class FloodManager : MonoBehaviour {
     MarchingTile GetAt(int x, int y) {
         x = Mathf.Clamp(x, 0, gridManager.width - 2);
         y = Mathf.Clamp(y, 0, gridManager.height - 2);
-        return new MarchingTile {
-            x = gridManager.tiles[x, y].waterLevel > 0,
-            xx = gridManager.tiles[x + 1, y].waterLevel > 0,
-            y = gridManager.tiles[x, y + 1].waterLevel > 0,
-            xy = gridManager.tiles[x + 1, y + 1].waterLevel > 0
-        };
+        try
+        {
+            return new MarchingTile {
+                x = gridManager.tiles[x, y].waterLevel > 0,
+                xx = gridManager.tiles[x + 1, y].waterLevel > 0,
+                y = gridManager.tiles[x, y + 1].waterLevel > 0,
+                xy = gridManager.tiles[x + 1, y + 1].waterLevel > 0
+            };
+        }
+        catch {}
+
+        return new MarchingTile();
     }
 
     MarchingTile RotateCW(MarchingTile mt) {
@@ -179,7 +185,12 @@ public class FloodManager : MonoBehaviour {
     struct TempTile {
         public int x, y, waterLevel;
     };
-    private void Tick() {
+
+    public void StartTicking()
+    {
+        InvokeRepeating("Tick",0,0.5f);
+    }
+    void Tick() {
 
         List<Tile.SerializableTile> buffer = new List<Tile.SerializableTile>();
         for (int x = 0; x < gridManager.width; x++) {

@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
@@ -11,6 +12,7 @@ public class Tile : MonoBehaviour {
         Tree,
     }
 
+    [Serializable]
     public struct SerializableTile {
         public int x, y;
         public int waterLevel;

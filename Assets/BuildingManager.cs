@@ -20,6 +20,7 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField] Tilemap tileMap;
     int money = 1500;
+    public static bool canBuild = true;
     [SerializeField] Building[] Buildings;
     [SerializeField] GameObject grid;
     public int selectedIndex = 0;
@@ -40,7 +41,7 @@ public class BuildingManager : MonoBehaviour
 
     public bool CanBuild()
     {
-        if (Buildings[selectedIndex].cost > money) return false;
+        if (Buildings[selectedIndex].cost > money || !canBuild) return false;
 
         if (selectedIndex == 0) return false;
 
