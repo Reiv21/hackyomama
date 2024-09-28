@@ -38,6 +38,7 @@ public class GridManager : MonoBehaviour {
                 tile.x = x;
                 tile.y = y;
                 tiles[x, y] = tile;
+                tile.heightLevel = (int)((Mathf.PerlinNoise((float)x / width, (float)y / height) * 100f) * 0.5f);
                 tile.UpdateTile();
             }
         }

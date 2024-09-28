@@ -200,18 +200,32 @@ public class FloodManager : MonoBehaviour {
                         continue;
                     }
                     Tile neighbor = gridManager.tiles[nx, ny];
-                    if (neighbor.heightLevel > tile.heightLevel) {
+                    if (neighbor.heightLevel > tile.heightLevel + (0.5f * tile.waterLevel)) {
                         continue;
                     }
-                    if (neighbor.waterLevel + 1 < tile.waterLevel) {
-                        floodableNeighbors.Add(neighbor);
-                        print("test");
-                    }
+                    // if (neighbor.waterLevel + 1 < tile.waterLevel) {
+                    floodableNeighbors.Add(neighbor);
+                    // print("test");
+                    // }
                 }
 
                 foreach (var neighbor in floodableNeighbors) {
                     var n = neighbor.ToSerializableTile();
-                    n.waterLevel = (int)(tile.waterLevel * (2f / 3f) * (1f / floodableNeighbors.Count));
+                    if (n.waterLevel == 0) {
+                        n.waterLevel = (int)(tile.waterLevel * (2f / 3f) * (1f / floodableNeighbors.Count));
+                    } else {
+                        float frac = 1f / 3f;
+                        // Push 1/3 of water to the smaller one
+                        if (n.waterLevel < tile.waterLevel) {
+                            int diff = tile.waterLevel - n.waterLevel;
+                            n.waterLevel += (int)(diff * frac);
+                            tile.waterLevel -= (int)(diff * frac);
+                        } else {
+                            int diff = n.waterLevel - tile.waterLevel;
+                            n.waterLevel -= (int)(diff * frac);
+                            tile.waterLevel += (int)(diff * frac);
+                        }
+                    }
                     buffer.Add(n);
                 }
             }
