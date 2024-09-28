@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Level;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour
 {
     public AudioClip audioClip; // Assign the audio clip in the Inspector
@@ -41,27 +42,26 @@ public class StartGame : MonoBehaviour
 
     IEnumerator PlayAudioAndShowImage()
     {
-        musicSource.volume = 0.2f;
-            audioSource.clip = audioClip;
+        musicSource.volume = 0.1f;
+        audioSource.clip = audioClip;
         audioSource.pitch = 0.5f;
-            audioSource.Play();
+        audioSource.Play();
 
-            // Show the image
-            imageToShow1.enabled = true;
+        // Show the image
+        imageToShow1.enabled = true;
 
-            // Wait for the audio to finish or half a second, whichever is longer
-            yield return new WaitForSeconds(audioClip.length > 0.5f ? audioClip.length : 0.5f);
+        // Wait for the audio to finish or half a second, whichever is longer
+        yield return new WaitForSeconds(audioClip.length > 0.5f ? audioClip.length : 0.5f);
 
-            audioSource.Play();
-            imageToShow2.enabled = true;
+        audioSource.Play();
+        imageToShow2.enabled = true;
             
-            // Wait for the specified delay
-            yield return new WaitForSeconds(delay);
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
 
         panel.SetActive(true);
         StartCoroutine(FadeTextOutIn(newText));
         rainSource.Play();
-        
     }
 
     // Coroutine to fade out the current text and fade in the new text
@@ -78,6 +78,8 @@ public class StartGame : MonoBehaviour
 
         // Fade in new text
         yield return StartCoroutine(FadeIn());
+
+        SceneManager.LoadScene("Cutscene");
     }
 
     // Coroutine to fade out the current text
