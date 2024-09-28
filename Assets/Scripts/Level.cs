@@ -3,6 +3,7 @@ using UnityEngine;
 using static Tile;
 
 public class Level {
+    [System.Serializable]
     public struct Path {
         public Vector2 direction;
         public Vector2 position;

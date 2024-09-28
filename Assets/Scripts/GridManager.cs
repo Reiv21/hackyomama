@@ -7,16 +7,6 @@ public class GridManager : MonoBehaviour {
     [HideInInspector]
     public static GridManager instance;
 
-    [SerializeField] BuildingManager buildingManager;
-
-    public void Awake() {
-        if (instance != null) {
-            Debug.LogWarning("Multiple GridManagers detected, destroying this one");
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-    }
 
 
     public int width;
@@ -31,7 +21,14 @@ public class GridManager : MonoBehaviour {
     public SpriteRenderer selection;
 
 
-    void Start() {
+    [SerializeField] BuildingManager buildingManager;
+    void Awake() {
+        if (instance != null) {
+            Debug.LogWarning("Multiple GridManagers detected, destroying this one");
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         tiles = new Tile[width, height];
 
         for (int x = 0; x < width; x++) {
@@ -70,12 +67,13 @@ public class GridManager : MonoBehaviour {
         Tile tile = tiles[x, y];
 
         if (Input.GetMouseButtonDown(0)) {
-            // tile.waterLevel += 1;
-            // tile.UpdateTile();
-            if(!buildingManager.CanBuild()) return;
-            Debug.Log((Tile.TileType) buildingManager.selectedIndex);
-            PlaceTile(x, y, (Tile.TileType) buildingManager.selectedIndex);
+            if (!buildingManager.CanBuild()) return;
+            Debug.Log((Tile.TileType)buildingManager.selectedIndex);
+            PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
             buildingManager.Build();
+        } else if (Input.GetMouseButton(1)) {
+            tile.waterLevel = 250;
+            tile.UpdateTile();
         }
 
         lastMousePos = new Vector2(x, y);
