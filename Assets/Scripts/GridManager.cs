@@ -56,7 +56,7 @@ public class GridManager : MonoBehaviour {
         int y = Mathf.FloorToInt(mousePos.y + 0.5f);
 
         selection.transform.position = Vector3.Lerp(selection.transform.position, lastMousePos, 0.25f);
-        selection.color = new Color(1, 1, 1, 1);
+        selection.color = new Color(1, 1, 1, 0.5f);
         if (IsOOB(x, y)) {
             // OOB, hide
             selection.color = new Color(1, 1, 1, 0);
