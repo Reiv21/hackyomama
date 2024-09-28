@@ -11,7 +11,7 @@ public class CoolTypingScript : MonoBehaviour
     [SerializeField] GameObject pressAnythingText;
     [SerializeField] Dialogue[] dialogues;
     int letterIndex = 0;
-    int dialogueIndex = 0;
+    public int dialogueIndex = 0;
     
     [Serializable]
     public class Dialogue
