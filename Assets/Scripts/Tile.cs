@@ -14,12 +14,14 @@ public class Tile : MonoBehaviour {
     public struct SerializableTile {
         public int x, y;
         public int waterLevel;
+        public int heightLevel;
 
         public TileType type;
     }
 
     public int x, y;
     public int waterLevel;
+    public int heightLevel;
     public TileType type = TileType.Grass;
 
 
@@ -31,8 +33,11 @@ public class Tile : MonoBehaviour {
         } else {
             spriteRenderer.sprite = LevelManager.instance.tileSprites[(int)type];
         }
-        if (waterLevel > 0)
-            spriteRenderer.color = new Color(0.4f, 0.67f, 1, waterLevel / 250f);
+        // if (waterLevel > 0)
+        // spriteRenderer.color = new Color(0.4f, 0.67f, 1, waterLevel / 250f);
+        if (type == TileType.Grass) {
+            spriteRenderer.color = Color.Lerp(new Color(0.4f, 0.65f, 0.4f), Color.white, heightLevel / 150f);
+        }
     }
 
     public SerializableTile ToSerializableTile() {
@@ -40,6 +45,7 @@ public class Tile : MonoBehaviour {
             x = x,
             y = y,
             waterLevel = waterLevel,
+            heightLevel = heightLevel,
             type = type
         };
     }
@@ -48,6 +54,7 @@ public class Tile : MonoBehaviour {
         x = serializableTile.x;
         y = serializableTile.y;
         waterLevel = serializableTile.waterLevel;
+        heightLevel = serializableTile.heightLevel;
         type = serializableTile.type;
         UpdateTile();
     }
