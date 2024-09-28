@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 1729872639}
   - component: {fileID: 1729872638}
   m_Layer: 0
-  m_Name: BoomSound
+  m_Name: RainSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1703,7 +1703,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8c118b584f99b4c479e3b912207658e8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 728e4d51e02faa74698236bb05ad953e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.7
   m_Pitch: -3
@@ -1950,10 +1950,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efae150b4b4ed343834e9e9abd668b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 8c118b584f99b4c479e3b912207658e8, type: 3}
+  audioClip: {fileID: 8300000, guid: 46c611a789a7f0043b446ce1fa238724, type: 3}
   imageToShow1: {fileID: 812147224}
   imageToShow2: {fileID: 1960608125}
   delay: 0.5
+  musicSource: {fileID: 1584707827}
+  rainSource: {fileID: 1729872638}
   textMeshPro: {fileID: 1192702574}
   newText: The flood.
   fadeDuration: 1

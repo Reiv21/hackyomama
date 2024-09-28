@@ -12,6 +12,7 @@ public class StartGame : MonoBehaviour
 
     private AudioSource audioSource;
     public AudioSource musicSource;
+    public AudioSource rainSource;
 
     public TextMeshProUGUI textMeshPro; // Assign the TMP text object in the Inspector
     public string newText;              // The new text to fade in
@@ -59,7 +60,7 @@ public class StartGame : MonoBehaviour
 
         panel.SetActive(true);
         StartCoroutine(FadeTextOutIn(newText));
-
+        rainSource.Play();
         
     }
 
