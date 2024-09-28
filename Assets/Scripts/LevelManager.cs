@@ -9,9 +9,9 @@ public class LevelManager : MonoBehaviour {
     public static Tile.SerializableTile[] specialTiles;
 
     [HideInInspector]
-    public int housesStart = -1;
+    public int housesStart = 0;
     [HideInInspector]
-    public int houseCount = -1;
+    public int houseCount = 0;
 
     public void Awake() {
         if (instance != null) {

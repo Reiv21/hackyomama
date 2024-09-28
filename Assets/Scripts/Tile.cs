@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour {
         }
 
         if (type == TileType.House) {
-            if (waterLevel > 10) {
+            if (waterLevel > 0) {
                 type = TileType.Grass;
                 LevelManager.instance.houseCount--;
                 UpdateTile();

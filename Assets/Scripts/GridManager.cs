@@ -81,7 +81,7 @@ public class GridManager : MonoBehaviour {
         Tile tile = tiles[x, y];
 
         if (Input.GetMouseButtonDown(0)) {
-            if (!buildingManager.CanBuild()) return;
+            if ( !buildingManager.CanBuild() || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
             buildingManager.Build();
