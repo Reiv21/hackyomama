@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CoolTypingScript : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CoolTypingScript : MonoBehaviour
     [SerializeField] GameObject pressAnythingText;
     [SerializeField] Dialogue[] dialogues;
     int letterIndex = 0;
+    [SerializeField] int indexOfSceneToLoad = -1;
     public int dialogueIndex = 0;
     
     [Serializable]
@@ -50,7 +52,7 @@ public class CoolTypingScript : MonoBehaviour
     {
         if (dialogueIndex >= dialogues.Length)
         {
-            Debug.LogWarning("End of dialogues");
+            SceneManager.LoadScene(indexOfSceneToLoad);
             gameObject.SetActive(false);
             return;
         }

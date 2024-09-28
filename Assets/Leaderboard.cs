@@ -15,15 +15,17 @@ public class Leaderboard : MonoBehaviour
     void Start()
     {
         mainText.text = "LEADERBOARD\nMission " + missionNumber;
+        ShowLeaderboard();
+    }
+
+    public void ShowLeaderboard()
+    {
         LoadPlayerData(10);
         RefreshLeaderboard();
-        AddPlayers("TEST2", UnityEngine.Random.Range(1,100));
         SavePlayerData(players, scores);
-        //LoadPlayerData(10);
         RefreshLeaderboard();
-    }
-    
-    public void RefreshLeaderboard()
+    } 
+    void RefreshLeaderboard()
     {
         for(int i = 0; i < players.Length; i++)
         {
