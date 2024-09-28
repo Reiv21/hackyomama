@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FloodManager : MonoBehaviour {
@@ -30,6 +32,7 @@ public class FloodManager : MonoBehaviour {
             return;
         }
 
+        // Debug water connections
         for (int x = 0; x < gridManager.width; x++) {
             for (int y = 0; y < gridManager.height; y++) {
                 Tile tile = gridManager.tiles[x, y];
@@ -42,6 +45,21 @@ public class FloodManager : MonoBehaviour {
             }
         }
     }
+
+    private void OnGUI() {
+
+        // Draw water level and height text
+        for (int x = 0; x < gridManager.width; x++) {
+            for (int y = 0; y < gridManager.height; y++) {
+                Tile tile = gridManager.tiles[x, y];
+                Vector3 pos = Camera.main.WorldToScreenPoint(new Vector3(x, y, 0));
+                GUI.Label(new Rect(pos.x, Screen.height - pos.y, 100, 100), tile.waterLevel.ToString());
+                GUI.Label(new Rect(pos.x, Screen.height - pos.y + 10, 100, 100), tile.heightLevel.ToString());
+            }
+        }
+
+    }
+
 
     public void Start() {
         gridManager = GridManager.instance;
@@ -145,8 +163,62 @@ public class FloodManager : MonoBehaviour {
     }
 
     private void Update() {
-
         UpdateWaterTiles();
-    }
+        if (Input.GetKeyDown(KeyCode.Backspace)) {
+            for (int x = 0; x < gridManager.width; x++) {
+                for (int y = 0; y < gridManager.height; y++) {
+                    gridManager.tiles[x, y].waterLevel = 0;
+                }
+            }
+        }
 
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Tick();
+        }
+    }
+    struct TempTile {
+        public int x, y, waterLevel;
+    };
+    private void Tick() {
+
+        List<Tile.SerializableTile> buffer = new List<Tile.SerializableTile>();
+        for (int x = 0; x < gridManager.width; x++) {
+            for (int y = 0; y < gridManager.height; y++) {
+                Tile tile = gridManager.tiles[x, y];
+                if (!(tile.waterLevel > 0)) { continue; }
+                var directions = new List<Vector2> {
+                    new(1, 0),
+                    new(-1, 0),
+                    new(0, 1),
+                    new(0, -1),
+                };
+                List<Tile> floodableNeighbors = new();
+                for (int i = 0; i < 4; i++) {
+                    int nx = x + (int)directions[i].x;
+                    int ny = y + (int)directions[i].y;
+                    if (gridManager.IsOOB(nx, ny)) {
+                        continue;
+                    }
+                    Tile neighbor = gridManager.tiles[nx, ny];
+                    if (neighbor.heightLevel > tile.heightLevel) {
+                        continue;
+                    }
+                    if (neighbor.waterLevel + 1 < tile.waterLevel) {
+                        floodableNeighbors.Add(neighbor);
+                        print("test");
+                    }
+                }
+
+                foreach (var neighbor in floodableNeighbors) {
+                    var n = neighbor.ToSerializableTile();
+                    n.waterLevel = (int)(tile.waterLevel * (2f / 3f) * (1f / floodableNeighbors.Count));
+                    buffer.Add(n);
+                }
+            }
+        }
+
+        foreach (var tile in buffer) {
+            gridManager.tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
+        }
+    }
 }

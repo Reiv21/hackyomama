@@ -44,7 +44,7 @@ public class GridManager : MonoBehaviour {
 
     }
 
-    bool IsOOB(int x, int y) {
+    public bool IsOOB(int x, int y) {
         return x < 0 || x >= width || y < 0 || y >= height;
     }
 
@@ -72,7 +72,10 @@ public class GridManager : MonoBehaviour {
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
             buildingManager.Build();
         } else if (Input.GetMouseButton(1)) {
-            tile.waterLevel = 250;
+            tile.waterLevel = 120;
+            tile.UpdateTile();
+        } else if (Input.GetMouseButton(2)) {
+            tile.heightLevel = 120;
             tile.UpdateTile();
         }
 
