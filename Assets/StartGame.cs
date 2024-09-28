@@ -57,7 +57,7 @@ public class StartGame : MonoBehaviour
         imageToShow2.enabled = true;
             
         // Wait for the specified delay
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(1f);
 
         panel.SetActive(true);
         StartCoroutine(FadeTextOutIn(newText));
@@ -107,7 +107,7 @@ public class StartGame : MonoBehaviour
         float elapsedTime = 0f;
         Color color = textMeshPro.color;
 
-        while (elapsedTime < fadeDuration)
+        while (elapsedTime < 2.5f)
         {
             elapsedTime += Time.deltaTime;
             color.a = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
