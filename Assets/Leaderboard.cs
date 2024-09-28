@@ -22,7 +22,7 @@ public class Leaderboard : MonoBehaviour
         //LoadPlayerData(10);
         RefreshLeaderboard();
     }
-
+    
     public void RefreshLeaderboard()
     {
         for(int i = 0; i < players.Length; i++)
