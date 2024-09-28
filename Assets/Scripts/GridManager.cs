@@ -7,7 +7,7 @@ public class GridManager : MonoBehaviour {
 
     [HideInInspector]
     public static GridManager instance;
-    
+
     public int width;
     public int height;
 
@@ -22,10 +22,8 @@ public class GridManager : MonoBehaviour {
 
     [SerializeField] BuildingManager buildingManager;
 
-    void Awake()
-    {
-        if (instance != null)
-        {
+    void Awake() {
+        if (instance != null) {
             Debug.LogWarning("Multiple GridManagers detected, destroying this one");
             Destroy(gameObject);
             return;
@@ -35,8 +33,7 @@ public class GridManager : MonoBehaviour {
         tiles = new Tile[width, height];
     }
 
-    void Start()
-    {
+    void Start() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 GameObject tileObject = Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
@@ -48,10 +45,16 @@ public class GridManager : MonoBehaviour {
                 tile.UpdateTile();
             }
         }
-        foreach (var tile in LevelManager.specialTiles)
-        {
+        foreach (var tile in LevelManager.specialTiles) {
+            tiles[tile.x, tile.y].type = tile.type;
             tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
             tiles[tile.x, tile.y].heightLevel = tile.heightLevel;
+
+            if (tile.type == Tile.TileType.House) {
+                LevelManager.instance.housesStart++;
+                LevelManager.instance.houseCount++;
+            }
+            tiles[tile.x, tile.y].UpdateTile();
         }
     }
 
@@ -82,13 +85,10 @@ public class GridManager : MonoBehaviour {
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
             buildingManager.Build();
-            if (buildingManager.selectedIndex == 2)
-            {
+            if (buildingManager.selectedIndex == 2) {
                 tile.heightLevel = 120;
                 tile.UpdateTile();
-            }
-            else if (buildingManager.selectedIndex == 1)
-            {
+            } else if (buildingManager.selectedIndex == 1) {
                 tile.heightLevel = -10;
                 tile.UpdateTile();
             }

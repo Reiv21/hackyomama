@@ -40,6 +40,17 @@ public class Tile : MonoBehaviour {
         if (type == TileType.Grass) {
             spriteRenderer.color = Color.Lerp(new Color(0.4f, 0.65f, 0.4f), Color.white, heightLevel / 150f);
         }
+
+        if (type == TileType.House) {
+            if (waterLevel > 10) {
+                type = TileType.Grass;
+                LevelManager.instance.houseCount--;
+                UpdateTile();
+                if (LevelManager.instance.houseCount == 0) {
+                    GameOver.instance.Lost();
+                }
+            }
+        }
     }
 
     public SerializableTile ToSerializableTile() {

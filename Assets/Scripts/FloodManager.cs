@@ -85,16 +85,14 @@ public class FloodManager : MonoBehaviour {
     MarchingTile GetAt(int x, int y) {
         x = Mathf.Clamp(x, 0, gridManager.width - 2);
         y = Mathf.Clamp(y, 0, gridManager.height - 2);
-        try
-        {
+        try {
             return new MarchingTile {
                 x = gridManager.tiles[x, y].waterLevel > 0,
                 xx = gridManager.tiles[x + 1, y].waterLevel > 0,
                 y = gridManager.tiles[x, y + 1].waterLevel > 0,
                 xy = gridManager.tiles[x + 1, y + 1].waterLevel > 0
             };
-        }
-        catch {}
+        } catch { }
 
         return new MarchingTile();
     }
@@ -186,13 +184,16 @@ public class FloodManager : MonoBehaviour {
         public int x, y, waterLevel;
     };
 
-    public void StartTicking()
-    {
-        InvokeRepeating("Tick",0,0.5f);
+    public void StartTicking() {
+        InvokeRepeating(nameof(Tick), 0, 0.5f);
     }
-    void Tick() {
 
-        List<Tile.SerializableTile> buffer = new List<Tile.SerializableTile>();
+    void Tick() {
+        if (GameOver.instance.isGameOver) {
+            CancelInvoke(nameof(Tick));
+            return;
+        }
+        List<Tile.SerializableTile> buffer = new();
         for (int x = 0; x < gridManager.width; x++) {
             for (int y = 0; y < gridManager.height; y++) {
                 Tile tile = gridManager.tiles[x, y];
@@ -214,10 +215,7 @@ public class FloodManager : MonoBehaviour {
                     if (neighbor.heightLevel > tile.heightLevel + (0.5f * tile.waterLevel)) {
                         continue;
                     }
-                    // if (neighbor.waterLevel + 1 < tile.waterLevel) {
                     floodableNeighbors.Add(neighbor);
-                    // print("test");
-                    // }
                 }
 
                 foreach (var neighbor in floodableNeighbors) {
@@ -242,8 +240,21 @@ public class FloodManager : MonoBehaviour {
             }
         }
 
+        int endLevel = 0;
+
         foreach (var tile in buffer) {
+            if (gridManager.tiles[tile.x, tile.y].waterLevel == tile.waterLevel) {
+                continue;
+            }
             gridManager.tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
+            gridManager.tiles[tile.x, tile.y].UpdateTile();
+            endLevel++;
+        }
+
+        if (endLevel == 0) {
+            CancelInvoke(nameof(Tick));
+            GameOver.instance.Win();
+            return;
         }
     }
 }

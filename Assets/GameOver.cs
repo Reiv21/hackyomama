@@ -6,31 +6,29 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOver : MonoBehaviour
-{
+public class GameOver : MonoBehaviour {
     public static GameOver instance;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject lostPanel;
     [SerializeField] TMP_Text scoreText;
-    void Awake()
-    {
+
+    public bool isGameOver { get; private set; }
+    void Awake() {
         instance = this;
     }
 
-    public void Win()
-    {
+    public void Win() {
         winPanel.SetActive(true);
     }
-    public void Lost()
-    {
+    public void Lost() {
+        isGameOver = true;
         lostPanel.SetActive(true);
     }
-    public void TryAgain()
-    {
+    public void TryAgain() {
+        isGameOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    public void Menu()
-    {
+    public void Menu() {
         SceneManager.LoadScene(0);
     }
 }

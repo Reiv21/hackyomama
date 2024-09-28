@@ -7,6 +7,12 @@ public class LevelManager : MonoBehaviour {
     public static LevelManager instance;
     public Tile.SerializableTile[] localSpecialTiles;
     public static Tile.SerializableTile[] specialTiles;
+
+    [HideInInspector]
+    public int housesStart = -1;
+    [HideInInspector]
+    public int houseCount = -1;
+
     public void Awake() {
         if (instance != null) {
             Debug.LogWarning("Multiple LevelManagers detected, destroying this one");
@@ -20,8 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     public List<Sprite> tileSprites;
 
-    public void PlayButton()
-    {
+    public void PlayButton() {
         FloodManager.instance.StartTicking();
         BuildingManager.canBuild = false;
     }
