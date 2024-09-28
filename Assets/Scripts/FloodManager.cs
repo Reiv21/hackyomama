@@ -1,0 +1,152 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FloodManager : MonoBehaviour {
+
+
+    GridManager gridManager;
+    public List<GameObject> waterTiles;
+    public List<Sprite> sprites;
+    public GameObject waterTilePrefab;
+
+
+    [HideInInspector]
+    public static FloodManager instance;
+
+
+    public void Awake() {
+        if (instance != null) {
+            Debug.LogWarning("Multiple FloodManagers detected, destroying this one");
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+
+
+
+    private void OnDrawGizmos() {
+        if (gridManager == null) {
+            return;
+        }
+
+        for (int x = 0; x < gridManager.width; x++) {
+            for (int y = 0; y < gridManager.height; y++) {
+                Tile tile = gridManager.tiles[x, y];
+                if (tile.waterLevel > 0) {
+                    Gizmos.color = new Color(0.4f, 0.67f, 1f, 1.0f);
+                } else {
+                    Gizmos.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+                }
+                Gizmos.DrawSphere(new Vector3(x, y, 0), 0.1f);
+            }
+        }
+    }
+
+    public void Start() {
+        gridManager = GridManager.instance;
+
+        int width = gridManager.width;
+        int height = gridManager.height;
+
+        for (int x = 0; x < width - 1; x++) {
+            for (int y = 0; y < height - 1; y++) {
+                // GameObject tileObject = Instantiate(waterTilePrefab, new Vector3(x + .25f, y + .25f, 0), Quaternion.identity);
+                GameObject tileObject = Instantiate(waterTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
+                tileObject.transform.SetParent(transform);
+                waterTiles.Add(tileObject);
+            }
+        }
+        UpdateWaterTiles();
+    }
+
+    struct MarchingTile {
+        public bool x, xx, y, xy;
+    }
+
+    MarchingTile GetAt(int x, int y) {
+        x = Mathf.Clamp(x, 0, gridManager.width - 2);
+        y = Mathf.Clamp(y, 0, gridManager.height - 2);
+        return new MarchingTile {
+            x = gridManager.tiles[x, y].waterLevel > 0,
+            xx = gridManager.tiles[x + 1, y].waterLevel > 0,
+            y = gridManager.tiles[x, y + 1].waterLevel > 0,
+            xy = gridManager.tiles[x + 1, y + 1].waterLevel > 0
+        };
+    }
+
+    MarchingTile RotateCW(MarchingTile mt) {
+        return new MarchingTile {
+            x = mt.xx,
+            y = mt.x,
+            xy = mt.y,
+            xx = mt.xy
+        };
+    }
+
+    bool IsEqual(MarchingTile a, MarchingTile b) {
+        return a.x == b.x && a.xx == b.xx && a.y == b.y && a.xy == b.xy;
+    }
+
+    int IsEqualAllRotations(MarchingTile a, MarchingTile b) {
+        if (IsEqual(a, b)) {
+            return 0;
+        }
+        if (IsEqual(RotateCW(a), b)) {
+            return 1;
+        }
+        if (IsEqual(RotateCW(RotateCW(a)), b)) {
+            return 2;
+        }
+        if (IsEqual(RotateCW(RotateCW(RotateCW(a))), b)) {
+            return 3;
+        }
+        return -1;
+    }
+
+    int MatchTile(MarchingTile mt) {
+        // jakie gowno what the sigma
+        var possible = new List<MarchingTile>{
+            new() { x = false, xx = false, y = false, xy = false },
+            new() { x = true, xx = false, y = false, xy = false },
+            new() { x = true, xx = true, y = false, xy = false },
+            new() { x = true, xx = true, y = true, xy = false },
+            new() { x = true, xx = true, y = true, xy = true },
+            new() { x = false, xx = true, y = true, xy = false },
+        };
+
+        for (int i = 0; i < possible.Count; i++) {
+            var eq = IsEqualAllRotations(mt, possible[i]);
+            if (eq != -1) {
+                return eq * 10 + i;
+            }
+            if (i == 5) {
+                print("co sie odjebalo" + eq);
+            }
+        }
+
+        return 0; // ?????
+    }
+
+    public void UpdateWaterTiles() {
+        if (gridManager == null) {
+            return;
+        }
+        for (int i = 0; i < waterTiles.Count; i++) {
+            int x = i / (gridManager.width - 1);
+            int y = i % (gridManager.height - 1);
+
+            MarchingTile mt = GetAt(x, y);
+            int match = MatchTile(mt);
+            var sr = waterTiles[i].GetComponent<SpriteRenderer>();
+            sr.sprite = sprites[match % 10];
+            sr.transform.rotation = Quaternion.Euler(0, 0, match / 10 * 90);
+        }
+    }
+
+    private void Update() {
+
+        UpdateWaterTiles();
+    }
+
+}

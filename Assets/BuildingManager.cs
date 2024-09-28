@@ -23,7 +23,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] Building[] Buildings;
     [SerializeField] GameObject grid;
     public int selectedIndex = 0;
-    //[SerializeField] Image buildingShow;
+    [SerializeField] SpriteRenderer buildingShow;
     [SerializeField] TMP_Text moneyText;
     [SerializeField] TMP_Text costText;
     [SerializeField] TMP_Text nameText;
@@ -48,12 +48,12 @@ public class BuildingManager : MonoBehaviour
     }
     public void BuildingSelected(int index)
     {
-        //buildingShow.sprite = Buildings[index].icon;
+        buildingShow.sprite = Buildings[index].icon;
         selectedIndex = index;
         nameText.text = Buildings[index].name;
         descText.text = Buildings[index].desc;
         costText.text = Buildings[index].cost + "$";
-        //buildingShow.gameObject.SetActive(buildingShow.sprite != null);
+        buildingShow.gameObject.SetActive(buildingShow.sprite != null);
     }
 
     public void Build()
