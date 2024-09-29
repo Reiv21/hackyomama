@@ -192,7 +192,7 @@ public class FloodManager : MonoBehaviour {
     };
 
     public void StartTicking() {
-        InvokeRepeating(nameof(Tick), 0, 0.5f);
+        InvokeRepeating(nameof(Tick), 0, 0.25f);
     }
 
     void Tick() {
