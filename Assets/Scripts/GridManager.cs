@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GridManager : MonoBehaviour {
 
@@ -71,7 +72,7 @@ public class GridManager : MonoBehaviour {
 
         selection.transform.position = Vector3.Lerp(selection.transform.position, lastMousePos, 0.25f);
         selection.color = new Color(1, 1, 1, 0.5f);
-        if (IsOOB(x, y)) {
+        if (IsOOB(x, y) | !EventSystem.current.IsPointerOverGameObject()) {
             // OOB, hide
             selection.color = new Color(1, 1, 1, 0);
             return;
