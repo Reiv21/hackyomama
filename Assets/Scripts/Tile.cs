@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour {
             spriteRenderer.sprite = LevelManager.instance.tileSprites[(int)type];
         }
         if (type == TileType.Grass) {
-            spriteRenderer.color = Color.Lerp(new Color(0.5f, 0.75f, 0.5f),new Color(0.42f, 0.35f, 0.12f), heightLevel / 25f);
+            spriteRenderer.color = Color.Lerp(new Color(0.5f, 0.75f, 0.5f), new Color(0.42f, 0.35f, 0.12f), heightLevel / 25f);
         } else {
             spriteRenderer.color = Color.white;
 
@@ -46,6 +46,7 @@ public class Tile : MonoBehaviour {
             if (waterLevel > 0) {
                 type = TileType.Grass;
                 LevelManager.instance.houseCount--;
+                Jukebox.instance.PlayBreak();
                 UpdateTile();
                 if (LevelManager.instance.houseCount == 0) {
                     GameOver.instance.Lost();

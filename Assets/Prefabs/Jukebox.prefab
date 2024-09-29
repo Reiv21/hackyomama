@@ -47,9 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: c8a2cae54c4eb394f8ecae79f3b8aa89, type: 3}
   place0Sound: {fileID: 8300000, guid: d911148dbd6b7e04198423e87f0903d9, type: 3}
-  place1Sound: {fileID: 0}
+  place1Sound: {fileID: 8300000, guid: d911148dbd6b7e04198423e87f0903d9, type: 3}
   waterSound: {fileID: 0}
-  breakSound: {fileID: 0}
+  breakSound: {fileID: 8300000, guid: 187f9cd1f29156a4bab590a5618e3069, type: 3}
 --- !u!82 &2793375095557040714
 AudioSource:
   m_ObjectHideFlags: 0
