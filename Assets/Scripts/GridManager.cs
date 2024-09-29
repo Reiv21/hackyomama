@@ -73,7 +73,11 @@ public class GridManager : MonoBehaviour {
             new (0, 1),
             new (0, -1),
             new (1, 0),
-            new (-1, 0)
+            new (-1, 0),
+            new (1,1),
+            new (-1,1),
+            new (1,-1),
+            new (-1,-1),
         };
         foreach (var dir in directions) {
             if (IsOOB(x + (int)dir.x, y + (int)dir.y)) {
@@ -104,12 +108,15 @@ public class GridManager : MonoBehaviour {
 
         Tile tile = tiles[x, y];
 
+        bool surr = HasSurroundingHouses(x, y);
+        buildingManager.UpdateExpensiveSign(surr);
+
         if (Input.GetMouseButton(0)) {
-            if (!buildingManager.CanBuild(HasSurroundingHouses(x, y)) || tile.type != Tile.TileType.Grass) return;
+            if (!buildingManager.CanBuild(surr) || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
-            buildingManager.Build(HasSurroundingHouses(x, y));
-            Debug.LogWarning("Buying expensive land? " + HasSurroundingHouses(x, y));
+            buildingManager.Build(surr);
+            Debug.LogWarning("Buying expensive land? " + surr);
             if (buildingManager.selectedIndex == 2) {
                 tile.heightLevel = 120;
                 tile.type = Tile.TileType.Building2;

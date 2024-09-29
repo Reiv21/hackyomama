@@ -24,6 +24,7 @@ public class BuildingManager : MonoBehaviour {
     [SerializeField] GameObject grid;
     public int selectedIndex = 0;
     [SerializeField] SpriteRenderer buildingShow;
+    [SerializeField] TMP_Text expensiveText;
     [SerializeField] TMP_Text moneyText;
     [SerializeField] TMP_Text costText;
     [SerializeField] TMP_Text nameText;
@@ -34,6 +35,11 @@ public class BuildingManager : MonoBehaviour {
             if (Buildings.Length - 1 < i) Destroy(grid.transform.GetChild(i).gameObject);
         }
         ChangeMoney(0);
+    }
+
+    public void UpdateExpensiveSign(bool expensiveLand) {
+        print("testststsetsetse");
+        expensiveText.enabled = expensiveLand;
     }
 
     public bool CanBuild(bool expensiveLand) {
