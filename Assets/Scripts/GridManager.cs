@@ -49,14 +49,19 @@ public class GridManager : MonoBehaviour {
         foreach (var tile in LevelManager.specialTiles) {
             tiles[tile.x, tile.y].type = tile.type;
             tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
-            if (tile.heightLevel != -1)
-            {
+            if (tile.heightLevel != -1) {
                 tiles[tile.x, tile.y].heightLevel = tile.heightLevel;
             }
 
             if (tile.type == Tile.TileType.House) {
                 LevelManager.instance.housesStart++;
                 LevelManager.instance.houseCount++;
+                GameObject bgTile = Instantiate(tilePrefab, new Vector3(tile.x, tile.y, 0), Quaternion.identity);
+                bgTile.name = "BGTILE";
+                var sr = bgTile.GetComponent<SpriteRenderer>();
+                sr.sortingOrder = 0;
+                sr.color = Color.Lerp(new Color(0.5f, 0.75f, 0.5f), new Color(0.42f, 0.35f, 0.12f), tiles[tile.x, tile.y].heightLevel / 25f);
+                // ^^^^ this tile is just for the background and is not added to the list
             }
             tiles[tile.x, tile.y].UpdateTile();
         }
@@ -115,7 +120,7 @@ public class GridManager : MonoBehaviour {
         bool surr = HasSurroundingHouses(x, y);
         buildingManager.UpdateExpensiveSign(surr);
 
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject() ) {
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
             if (!buildingManager.CanBuild(surr) || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);

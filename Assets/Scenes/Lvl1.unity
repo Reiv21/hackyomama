@@ -1641,14 +1641,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Selection
       objectReference: {fileID: 0}
-    - target: {fileID: 4619119568705198525, guid: 427e02a42689a6a4980bdcbc259dd855, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4619119568705198525, guid: 427e02a42689a6a4980bdcbc259dd855, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4750919954294515278, guid: 427e02a42689a6a4980bdcbc259dd855, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
