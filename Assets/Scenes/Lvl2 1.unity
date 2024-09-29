@@ -274,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &172217636
 RectTransform:
   m_ObjectHideFlags: 0
@@ -290,10 +290,10 @@ RectTransform:
   - {fileID: 605927462}
   m_Father: {fileID: 622627245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -146.74934, y: -105.480896}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &172217637
 MonoBehaviour:
@@ -629,11 +629,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8911504948809320628, guid: b478d344b78e1a64cba312fc9551bbaf, type: 3}
       propertyPath: width
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8911504948809320628, guid: b478d344b78e1a64cba312fc9551bbaf, type: 3}
       propertyPath: height
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8911504948809320628, guid: b478d344b78e1a64cba312fc9551bbaf, type: 3}
       propertyPath: selection
@@ -1826,11 +1826,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[0].x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[0].y
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[1].x
@@ -1846,7 +1846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[2].y
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[3].x
@@ -1854,7 +1854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[3].y
-      value: 1
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[4].x
@@ -1866,7 +1866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[5].x
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[5].y
@@ -1906,7 +1906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[0].waterLevel
-      value: 220
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[1].waterLevel
@@ -1914,7 +1914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[3].waterLevel
-      value: 190
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 2587056196886375038, guid: 4baa3a82a1c00144a81d655eca9cb56a, type: 3}
       propertyPath: localSpecialTiles.Array.data[4].waterLevel
@@ -2026,17 +2026,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMap: {fileID: 0}
-  money: 165
-  expensiveMultiplier: 5
+  money: 150
+  expensiveMultiplier: 3
   Buildings:
-  - name: Nothing
-    desc: ' '
+  - name: Name
+    desc: Description
     cost: 0
-  - name: Nothing
-    desc: ' '
+  - name: 
+    desc: 
     cost: 0
-  - name: Dam
-    desc: Blocks water
+  - name: Tame
+    desc: "Blokuje wod\u0119"
     cost: 15
   - name: Riverbed
     desc: Lowers terrain

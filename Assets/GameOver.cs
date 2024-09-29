@@ -14,8 +14,8 @@ public class GameOver : MonoBehaviour {
 
     public int CalcualteScore() {
         int score = 0;
-        score += (LevelManager.instance.houseCount) * 100 / LevelManager.instance.housesStart;
-        score += (int)(BuildingManager.instance.money * 2f);
+        score += (LevelManager.instance.houseCount) * 1000 / LevelManager.instance.housesStart;
+        score += (int)(BuildingManager.instance.money * 4f);
         return score;
     }
 
@@ -44,6 +44,6 @@ public class GameOver : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetSceneByName(SceneManager.GetActiveScene().name).buildIndex + 1);
     }
     public void Menu() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
