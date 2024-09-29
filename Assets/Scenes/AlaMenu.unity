@@ -1982,7 +1982,7 @@ MonoBehaviour:
   musicSource: {fileID: 1584707827}
   rainSource: {fileID: 1729872638}
   textMeshPro: {fileID: 1192702574}
-  newText: The flood.
+  newText: And the flood.
   fadeDuration: 1
   initialDelay: 5
   panel: {fileID: 1637272518}
