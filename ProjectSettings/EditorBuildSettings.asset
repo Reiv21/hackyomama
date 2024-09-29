@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/AlaMenu.unity
     guid: 375f920fa37c7fc4da6f6938bd0c91f1
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: b8b5c3d52d3f29e42862afe1b7ead151
+  - enabled: 1
     path: Assets/Scenes/Lvl1.unity
     guid: bbd98c742d145684ba116649901a97f5
   - enabled: 1
