@@ -35,12 +35,9 @@ public class Tile : MonoBehaviour {
         } else {
             spriteRenderer.sprite = LevelManager.instance.tileSprites[(int)type];
         }
-
         if (type == TileType.Grass) {
-            spriteRenderer.color = Color.Lerp(new Color(0.4f, 0.65f, 0.4f), Color.white, heightLevel / 150f);
-        }
-        else
-        {
+            spriteRenderer.color = Color.Lerp(new Color(0.12f, 0.3f, 0.12f), new Color(0.5f, 0.75f, 0.5f), heightLevel / 60f);
+        } else {
             spriteRenderer.color = Color.white;
 
         }

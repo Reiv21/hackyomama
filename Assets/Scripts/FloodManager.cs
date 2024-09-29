@@ -219,7 +219,7 @@ public class FloodManager : MonoBehaviour {
                         continue;
                     }
                     Tile neighbor = gridManager.tiles[nx, ny];
-                    if (neighbor.heightLevel > tile.heightLevel + (0.5f * tile.waterLevel)) {
+                    if (neighbor.heightLevel > tile.heightLevel + (0.123f * tile.waterLevel)) {
                         continue;
                     }
                     floodableNeighbors.Add(neighbor);
