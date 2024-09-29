@@ -10,7 +10,7 @@ public class FloodManager : MonoBehaviour {
     public List<GameObject> waterTiles;
     public List<Sprite> sprites;
     public GameObject waterTilePrefab;
-
+    bool flooding = false;
     int lastEndLevel = -1;
     [HideInInspector]
     public static FloodManager instance;
@@ -193,6 +193,8 @@ public class FloodManager : MonoBehaviour {
     };
 
     public void StartTicking() {
+        if(flooding) return;
+        flooding = true;
         InvokeRepeating(nameof(Tick), 0, 0.25f);
     }
 

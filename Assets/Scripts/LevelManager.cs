@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
@@ -30,5 +31,10 @@ public class LevelManager : MonoBehaviour {
         FloodManager.instance.StartTicking();
         BuildingManager.canBuild = false;
         Jukebox.instance.PlayClick();
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

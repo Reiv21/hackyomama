@@ -3,26 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = Unity.Mathematics.Random;
 
 public class Leaderboard : MonoBehaviour
 {
-    int missionNumber = -1;
+    public static Leaderboard instance;
+    public int missionNumber = -1;
     string[] players;
     int[] scores;
     [SerializeField] TMP_Text[] texts;
     [SerializeField] TMP_Text mainText;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         mainText.text = "LEADERBOARD\nMission " + missionNumber;
         ShowLeaderboard();
+        instance = this;
     }
 
     public void ShowLeaderboard()
     {
         LoadPlayerData(10);
         RefreshLeaderboard();
-        SavePlayerData(players, scores);
+        SavePlayerData();
         RefreshLeaderboard();
     } 
     void RefreshLeaderboard()
@@ -58,8 +67,10 @@ public class Leaderboard : MonoBehaviour
         }
     }
 
-    public void SavePlayerData(string[] playerNames, int[] playerScores)
+    public void SavePlayerData()
     {
+        string[] playerNames = players;
+        int[] playerScores = scores;
         for (int i = 0; i < playerNames.Length; i++)
         {
             PlayerPrefs.SetString(missionNumber + "_PlayerName_" + i, playerNames[i]);
