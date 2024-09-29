@@ -14,11 +14,11 @@ public class GameOver : MonoBehaviour {
 
     public int CalcualteScore() {
         int score = 0;
-        score += (LevelManager.instance.houseCount) * 100 /  LevelManager.instance.housesStart;
-        score += (int) (BuildingManager.instance.money * 20f);
+        score += (LevelManager.instance.houseCount) * 100 / LevelManager.instance.housesStart;
+        score += (int)(BuildingManager.instance.money * 2f);
         return score;
     }
-    
+
     public bool isGameOver { get; private set; }
     void Awake() {
         instance = this;
@@ -28,7 +28,7 @@ public class GameOver : MonoBehaviour {
         winPanel.SetActive(true);
         scoreText.text = "Score: " + CalcualteScore();
         Leaderboard.instance.ShowLeaderboard();
-        Leaderboard.instance.AddPlayers(DateTime.Now.ToString("yyyy-MM-dd-HH:mm"), CalcualteScore() );
+        Leaderboard.instance.AddPlayers(DateTime.Now.ToString("yyyy-MM-dd-HH:mm"), CalcualteScore());
         Leaderboard.instance.SavePlayerData();
     }
     public void Lost() {
