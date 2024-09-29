@@ -79,7 +79,7 @@ public class GridManager : MonoBehaviour {
         if (IsOOB(x, y)) {
             return false;
         }
-        if (tiles[x, y].type == Tile.TileType.House) {
+        if (tiles[x, y].type == Tile.TileType.House || tiles[x, y].waterLevel != 0) {
             return true;
         }
         var directions = new Vector2[] {
@@ -96,7 +96,7 @@ public class GridManager : MonoBehaviour {
             if (IsOOB(x + (int)dir.x, y + (int)dir.y)) {
                 continue;
             }
-            if (tiles[x + (int)dir.x, y + (int)dir.y].type == Tile.TileType.House) {
+            if (tiles[x + (int)dir.x, y + (int)dir.y].type == Tile.TileType.House || tiles[x + (int)dir.x, y + (int)dir.y].waterLevel != 0) {
                 return true;
             }
         }
