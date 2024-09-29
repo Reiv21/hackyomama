@@ -250,11 +250,11 @@ public class FloodManager : MonoBehaviour {
         int endLevel = 0;
 
         foreach (var tile in buffer) {
+            gridManager.tiles[tile.x, tile.y].UpdateTile();
             if (gridManager.tiles[tile.x, tile.y].waterLevel == tile.waterLevel) {
                 continue;
             }
             gridManager.tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
-            gridManager.tiles[tile.x, tile.y].UpdateTile();
             endLevel++;
         }
 
