@@ -87,9 +87,11 @@ public class GridManager : MonoBehaviour {
             buildingManager.Build();
             if (buildingManager.selectedIndex == 2) {
                 tile.heightLevel = 120;
+                tile.type = Tile.TileType.Building2;
                 tile.UpdateTile();
             } else if (buildingManager.selectedIndex == 1) {
                 tile.heightLevel = -10;
+                tile.type = Tile.TileType.Building2;
                 tile.UpdateTile();
             }
         } else if (Input.GetMouseButton(1)) {
