@@ -1009,11 +1009,11 @@ MonoBehaviour:
     desc: Description
     cost: 0
     icon: {fileID: 0}
-  - name: Koryto
+  - name: Riverbed
     desc: Lowers terrain
     cost: 5
     icon: {fileID: 21300000, guid: 45527868d14662142836180e1ffdc285, type: 3}
-  - name: Tama
+  - name: Tame
     desc: "Blokuje wod\u0119"
     cost: 15
     icon: {fileID: 21300000, guid: 0016e55920e1bff4699fb49a2a8f23c7, type: 3}
