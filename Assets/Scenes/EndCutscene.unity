@@ -565,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5415454094515515396, guid: 1db5118f5fa183346b0fc35fdd00f4cf, type: 3}
       propertyPath: indexOfSceneToLoad
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5415454094515515396, guid: 1db5118f5fa183346b0fc35fdd00f4cf, type: 3}
       propertyPath: dialogues.Array.data[0].name
