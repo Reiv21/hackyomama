@@ -32,6 +32,6 @@ public class CameraControls : MonoBehaviour {
 
         // Zoom in/out
         Camera.main.orthographicSize -= Camera.main.orthographicSize * Input.mouseScrollDelta.y * 0.1f;
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, 1, 100);
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, 3, 14);
     }
 }
