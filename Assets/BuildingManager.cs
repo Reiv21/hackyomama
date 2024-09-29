@@ -16,7 +16,7 @@ public class BuildingManager : MonoBehaviour {
     };
 
     [SerializeField] Tilemap tileMap;
-    public int money = 1500;
+    public int money = 200;
     public int expensiveMultiplier = 3;
     public static bool canBuild = true;
     [SerializeField] Building[] Buildings;
@@ -28,8 +28,22 @@ public class BuildingManager : MonoBehaviour {
     [SerializeField] TMP_Text costText;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text descText;
+    
+    public static BuildingManager instance;
+    
+    private void Awake() {
+        if (instance != null) {
+            Debug.LogWarning("Multiple BuildingManagers detected, destroying this one");
+            Destroy(gameObject);
+            return;
+        }
 
-    void Start() {
+        instance = this;
+    }
+
+    void Start()
+    {
+        canBuild = true;
         for (int i = 0; i < grid.transform.childCount; i++) {
             if (Buildings.Length - 1 < i) Destroy(grid.transform.GetChild(i).gameObject);
         }
@@ -37,8 +51,8 @@ public class BuildingManager : MonoBehaviour {
     }
 
     public void UpdateExpensiveSign(bool expensiveLand) {
-        print("testststsetsetse");
-        expensiveText.enabled = expensiveLand;
+        //print("testststsetsetse");
+        expensiveText.text = (expensiveLand ? "<!> EXPENSIVE LAND (3x) <!>" : ""); 
     }
 
     public bool CanBuild(bool expensiveLand) {

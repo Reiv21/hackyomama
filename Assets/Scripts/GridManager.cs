@@ -49,7 +49,10 @@ public class GridManager : MonoBehaviour {
         foreach (var tile in LevelManager.specialTiles) {
             tiles[tile.x, tile.y].type = tile.type;
             tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
-            tiles[tile.x, tile.y].heightLevel = tile.heightLevel;
+            if (tile.heightLevel != -1)
+            {
+                tiles[tile.x, tile.y].heightLevel = tile.heightLevel;
+            }
 
             if (tile.type == Tile.TileType.House) {
                 LevelManager.instance.housesStart++;
@@ -112,7 +115,7 @@ public class GridManager : MonoBehaviour {
         bool surr = HasSurroundingHouses(x, y);
         buildingManager.UpdateExpensiveSign(surr);
 
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject() ) {
             if (!buildingManager.CanBuild(surr) || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);

@@ -12,6 +12,13 @@ public class GameOver : MonoBehaviour {
     [SerializeField] GameObject lostPanel;
     [SerializeField] TMP_Text scoreText;
 
+    public int CalcualteScore() {
+        int score = 0;
+        score += (LevelManager.instance.houseCount / LevelManager.instance.housesStart) * 100;
+        score += (int) (BuildingManager.instance.money * 20f);
+        return score;
+    }
+    
     public bool isGameOver { get; private set; }
     void Awake() {
         instance = this;
@@ -19,6 +26,7 @@ public class GameOver : MonoBehaviour {
 
     public void Win() {
         winPanel.SetActive(true);
+        scoreText.text = "Score: " + CalcualteScore();
     }
     public void Lost() {
         isGameOver = true;

@@ -11,7 +11,7 @@ public class FloodManager : MonoBehaviour {
     public List<Sprite> sprites;
     public GameObject waterTilePrefab;
 
-
+    int lastEndLevel = -1;
     [HideInInspector]
     public static FloodManager instance;
 
@@ -175,6 +175,7 @@ public class FloodManager : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Backslash))
             debugToggle = !debugToggle;
+        /*
         if (Input.GetKeyDown(KeyCode.Backspace)) {
             for (int x = 0; x < gridManager.width; x++) {
                 for (int y = 0; y < gridManager.height; y++) {
@@ -185,7 +186,7 @@ public class FloodManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             Tick();
-        }
+        } */
     }
     struct TempTile {
         public int x, y, waterLevel;
@@ -257,12 +258,16 @@ public class FloodManager : MonoBehaviour {
             gridManager.tiles[tile.x, tile.y].waterLevel = tile.waterLevel;
             endLevel++;
         }
-
+        
         UpdateWaterTiles();
-        if (endLevel == 0) {
+        if (lastEndLevel == endLevel) {
             CancelInvoke(nameof(Tick));
             GameOver.instance.Win();
             return;
+        }
+        else
+        {
+            lastEndLevel = endLevel;
         }
     }
 }
