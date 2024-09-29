@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour {
         Grass,
         House,
         Building2,
+        Bed,
         Tree,
     }
 

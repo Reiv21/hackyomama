@@ -91,7 +91,7 @@ public class GridManager : MonoBehaviour {
                 tile.UpdateTile();
             } else if (buildingManager.selectedIndex == 1) {
                 tile.heightLevel = -10;
-                tile.type = Tile.TileType.Building2;
+                tile.type = Tile.TileType.Bed;
                 tile.UpdateTile();
             }
         } else if (Input.GetMouseButton(1)) {
