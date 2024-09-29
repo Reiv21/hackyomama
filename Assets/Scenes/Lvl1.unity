@@ -1997,14 +1997,14 @@ MonoBehaviour:
   money: 150
   expensiveMultiplier: 3
   Buildings:
-  - name: Name
-    desc: Description
+  - name: Empty
+    desc: ' '
     cost: 0
-  - name: 
-    desc: 
+  - name: Empty
+    desc: ' '
     cost: 0
-  - name: Tame
-    desc: "Blokuje wod\u0119"
+  - name: Dam
+    desc: Blocks water
     cost: 15
   - name: Riverbed
     desc: Lowers terrain

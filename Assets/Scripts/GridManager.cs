@@ -135,8 +135,8 @@ public class GridManager : MonoBehaviour {
                 tile.type = Tile.TileType.Building2;
                 Jukebox.instance.PlayPlace0();
                 tile.UpdateTile();
-            } else if (buildingManager.selectedIndex == 1) {
-                tile.heightLevel = -10;
+            } else if (buildingManager.selectedIndex == 3) {
+                tile.heightLevel = (int)(tile.heightLevel * 0.85f);
                 tile.type = Tile.TileType.Bed;
                 Jukebox.instance.PlayPlace1();
                 tile.UpdateTile();

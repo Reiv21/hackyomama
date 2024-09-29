@@ -28,9 +28,9 @@ public class BuildingManager : MonoBehaviour {
     [SerializeField] TMP_Text costText;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text descText;
-    
+
     public static BuildingManager instance;
-    
+
     private void Awake() {
         if (instance != null) {
             Debug.LogWarning("Multiple BuildingManagers detected, destroying this one");
@@ -41,8 +41,7 @@ public class BuildingManager : MonoBehaviour {
         instance = this;
     }
 
-    void Start()
-    {
+    void Start() {
         canBuild = true;
         for (int i = 0; i < grid.transform.childCount; i++) {
             if (Buildings.Length - 1 < i) Destroy(grid.transform.GetChild(i).gameObject);
@@ -52,7 +51,7 @@ public class BuildingManager : MonoBehaviour {
 
     public void UpdateExpensiveSign(bool expensiveLand) {
         //print("testststsetsetse");
-        expensiveText.text = (expensiveLand ? "<!> EXPENSIVE LAND (3x) <!>" : ""); 
+        expensiveText.text = (expensiveLand ? "<!> EXPENSIVE LAND (3x) <!>" : "");
     }
 
     public bool CanBuild(bool expensiveLand) {
@@ -63,13 +62,12 @@ public class BuildingManager : MonoBehaviour {
         return true;
     }
     public void BuildingSelected(int indexSprite) {
-        if (indexSprite == 3)
-        {
+        if (indexSprite == 3) {
             buildingShow.sprite = LevelManager.instance.tileSprites[3];
             selectedIndex = 3;
-            nameText.text = Buildings[selectedIndex-1].name;
-            descText.text = Buildings[selectedIndex-1].desc;
-            costText.text = Buildings[selectedIndex-1].cost + "$";
+            nameText.text = Buildings[selectedIndex].name;
+            descText.text = Buildings[selectedIndex].desc;
+            costText.text = Buildings[selectedIndex].cost + "$";
             buildingShow.gameObject.SetActive(buildingShow.sprite != null);
             return;
         }
