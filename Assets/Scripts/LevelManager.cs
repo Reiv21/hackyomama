@@ -29,5 +29,6 @@ public class LevelManager : MonoBehaviour {
     public void PlayButton() {
         FloodManager.instance.StartTicking();
         BuildingManager.canBuild = false;
+        Jukebox.instance.PlayClick();
     }
 }

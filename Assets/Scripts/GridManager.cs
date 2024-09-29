@@ -81,17 +81,19 @@ public class GridManager : MonoBehaviour {
         Tile tile = tiles[x, y];
 
         if (Input.GetMouseButtonDown(0)) {
-            if ( !buildingManager.CanBuild() || tile.type != Tile.TileType.Grass) return;
+            if (!buildingManager.CanBuild() || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
             buildingManager.Build();
             if (buildingManager.selectedIndex == 2) {
                 tile.heightLevel = 120;
                 tile.type = Tile.TileType.Building2;
+                Jukebox.instance.PlayPlace0();
                 tile.UpdateTile();
             } else if (buildingManager.selectedIndex == 1) {
                 tile.heightLevel = -10;
                 tile.type = Tile.TileType.Bed;
+                Jukebox.instance.PlayPlace1();
                 tile.UpdateTile();
             }
         } else if (Input.GetMouseButton(1)) {
