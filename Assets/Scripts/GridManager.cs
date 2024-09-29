@@ -13,6 +13,7 @@ public class GridManager : MonoBehaviour {
     public int height;
 
     public GameObject tilePrefab;
+    public GameObject dropletPrefab;
 
     public Level level; // unused, future use is for loading
 
@@ -62,6 +63,9 @@ public class GridManager : MonoBehaviour {
                 sr.sortingOrder = 0;
                 sr.color = Color.Lerp(new Color(0.5f, 0.75f, 0.5f), new Color(0.42f, 0.35f, 0.12f), tiles[tile.x, tile.y].heightLevel / 25f);
                 // ^^^^ this tile is just for the background and is not added to the list
+            }
+            if (tile.type == Tile.TileType.Grass && tile.waterLevel != 0) {
+                GameObject droplet = Instantiate(dropletPrefab, new Vector3(tile.x, tile.y, 0), Quaternion.identity);
             }
             tiles[tile.x, tile.y].UpdateTile();
         }

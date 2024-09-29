@@ -47,4 +47,6 @@ MonoBehaviour:
   width: 10
   height: 10
   tilePrefab: {fileID: 3301647916291891332, guid: 9a1e766751c494f4aa6a09bd8a6f18bf, type: 3}
+  dropletPrefab: {fileID: 8718814851141494106, guid: 6f61c1905dbbb0f4d95c7152ce3e3c69, type: 3}
   selection: {fileID: 0}
+  buildingManager: {fileID: 0}
