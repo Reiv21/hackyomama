@@ -104,7 +104,7 @@ public class GridManager : MonoBehaviour {
 
         Tile tile = tiles[x, y];
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButton(0)) {
             if (!buildingManager.CanBuild(HasSurroundingHouses(x, y)) || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
@@ -121,9 +121,6 @@ public class GridManager : MonoBehaviour {
                 Jukebox.instance.PlayPlace1();
                 tile.UpdateTile();
             }
-        } else if (Input.GetMouseButton(1)) {
-            tile.waterLevel = 220;
-            tile.UpdateTile();
         }
 
         lastMousePos = new Vector2(x, y);
