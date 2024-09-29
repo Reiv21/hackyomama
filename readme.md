@@ -1,2 +1,2 @@
-HackYeah 2024
+# HackYeah 2024
 Gra o lemurach i powodzi
