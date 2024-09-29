@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GridManager : MonoBehaviour {
 
@@ -111,7 +112,7 @@ public class GridManager : MonoBehaviour {
         bool surr = HasSurroundingHouses(x, y);
         buildingManager.UpdateExpensiveSign(surr);
 
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
             if (!buildingManager.CanBuild(surr) || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);

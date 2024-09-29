@@ -13,7 +13,6 @@ public class BuildingManager : MonoBehaviour {
         public string name;
         public string desc;
         public int cost;
-        public Sprite icon;
     };
 
     [SerializeField] Tilemap tileMap;
@@ -49,12 +48,22 @@ public class BuildingManager : MonoBehaviour {
 
         return true;
     }
-    public void BuildingSelected(int index) {
-        buildingShow.sprite = Buildings[index].icon;
-        selectedIndex = index;
-        nameText.text = Buildings[index].name;
-        descText.text = Buildings[index].desc;
-        costText.text = Buildings[index].cost + "$";
+    public void BuildingSelected(int indexSprite) {
+        if (indexSprite == 3)
+        {
+            buildingShow.sprite = LevelManager.instance.tileSprites[3];
+            selectedIndex = 3;
+            nameText.text = Buildings[selectedIndex-1].name;
+            descText.text = Buildings[selectedIndex-1].desc;
+            costText.text = Buildings[selectedIndex-1].cost + "$";
+            buildingShow.gameObject.SetActive(buildingShow.sprite != null);
+            return;
+        }
+        buildingShow.sprite = LevelManager.instance.tileSprites[indexSprite];
+        selectedIndex = indexSprite;
+        nameText.text = Buildings[indexSprite].name;
+        descText.text = Buildings[indexSprite].desc;
+        costText.text = Buildings[indexSprite].cost + "$";
         buildingShow.gameObject.SetActive(buildingShow.sprite != null);
     }
 
