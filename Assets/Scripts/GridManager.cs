@@ -62,6 +62,30 @@ public class GridManager : MonoBehaviour {
         return x < 0 || x >= width || y < 0 || y >= height;
     }
 
+    public bool HasSurroundingHouses(int x, int y) {
+        if (IsOOB(x, y)) {
+            return false;
+        }
+        if (tiles[x, y].type == Tile.TileType.House) {
+            return true;
+        }
+        var directions = new Vector2[] {
+            new (0, 1),
+            new (0, -1),
+            new (1, 0),
+            new (-1, 0)
+        };
+        foreach (var dir in directions) {
+            if (IsOOB(x + (int)dir.x, y + (int)dir.y)) {
+                continue;
+            }
+            if (tiles[x + (int)dir.x, y + (int)dir.y].type == Tile.TileType.House) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     Vector2 lastMousePos;
     void FixedUpdate() {
 
@@ -81,10 +105,11 @@ public class GridManager : MonoBehaviour {
         Tile tile = tiles[x, y];
 
         if (Input.GetMouseButtonDown(0)) {
-            if (!buildingManager.CanBuild() || tile.type != Tile.TileType.Grass) return;
+            if (!buildingManager.CanBuild(HasSurroundingHouses(x, y)) || tile.type != Tile.TileType.Grass) return;
 
             PlaceTile(x, y, (Tile.TileType)buildingManager.selectedIndex);
-            buildingManager.Build();
+            buildingManager.Build(HasSurroundingHouses(x, y));
+            Debug.LogWarning("Buying expensive land? " + HasSurroundingHouses(x, y));
             if (buildingManager.selectedIndex == 2) {
                 tile.heightLevel = 120;
                 tile.type = Tile.TileType.Building2;
