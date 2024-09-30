@@ -262,7 +262,7 @@ public class FloodManager : MonoBehaviour {
         }
         
         UpdateWaterTiles();
-        if (lastEndLevel == endLevel) {
+        if (lastEndLevel == endLevel && LevelManager.instance.houseCount > 0) {
             CancelInvoke(nameof(Tick));
             GameOver.instance.Win();
             return;

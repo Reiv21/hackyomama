@@ -44,6 +44,6 @@ public class GameOver : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetSceneByName(SceneManager.GetActiveScene().name).buildIndex + 1);
     }
     public void Menu() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }
